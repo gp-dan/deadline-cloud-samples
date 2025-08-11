@@ -11,7 +11,7 @@ package:
 
 source:
   url: archive_files/{{ display_name }}_{{ version_major }}_{{ version }}_Win.zip # [win64]
-  sha256: 92ad57b7a72e7fb16f7b1926524d71695a7c597a6d4eb3d44f870116a680f5f7
+  sha256: 7726ab4cbfe7e2b809af7d487e5e5587b7abb81f878d1c4bd81f65298b1671b9
   folder: cinema4d
 
 build:
