@@ -1,10 +1,10 @@
 
 package:
-  name: cinema4d-octane
-  version: "1.6"
+  name: cinema4d-c4dtoa
+  version: "2025"
 
 source:
-- path: ../../archive_files/cinema4d-octane-1.6/win-64 # [win64]
+- path: ../../archive_files/cinema4d-c4dtoa-2025/win-64 # [win64]
 
 build:
   number: 0
