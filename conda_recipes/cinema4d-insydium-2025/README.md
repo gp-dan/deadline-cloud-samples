@@ -32,6 +32,9 @@ C:\Dev\deadline-cloud-samples\conda_recipes>dir C:\...\conda-bld\win-64
 ...
 ```
 
+The --no-test flag avoids a conda error if cinema4d-2025 package hasn't already
+been built locally.
+
 ### Publish the locally built package to an S3 conda channel
 
 To publish your package to an S3 conda channel, two things need to happen:
@@ -85,42 +88,4 @@ C:\Dev\deadline-cloud-samples\conda_recipes>submit-package-job cinema4d-insydium
 No channel URL was provided, using a default prefix on the queue's job attachments bucket
 Building packages into channel s3://<MY_S3_CHANNEL_BUCKET>/Conda/Default
 ...
-```
-
-### INSYDUIM license check
-
-Add this [queue environment](https://docs.aws.amazon.com/deadline-cloud/latest/developerguide/configure-jobs.html)
-template to ensure render node license verifies correctly:
-
-```
-specificationVersion: "environment-2023-09"
-environment:
- name: INSYDIUM
- script:
-  actions:
-   onEnter:
-    command: "python"
-    args: [ "{{Env.File.Enter}}" ]
-  embeddedFiles:
-   - name: Enter
-     filename: check_insydium_license.py
-     type: TEXT
-     data: |
-      import subprocess
-
-      def check_license():
-          url = "https://license.insydium.net"
-          print(f"Testing {url}...")
-          try:
-              result = subprocess.run(['curl', '-v', url], timeout=30)
-              if result.returncode == 0:
-                  print("\nSUCCESS!")
-              else:
-                  print(f"\nFAILED (exit code: {result.returncode})")
-              return result.returncode == 0
-          except Exception as e:
-              print(f"Error: {e}")
-              return False
-
-      check_license()
 ```
